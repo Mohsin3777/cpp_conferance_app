@@ -1,3 +1,4 @@
+import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
 import 'package:conferance_app/utils/text_field_decoration.dart';
 import 'package:conferance_app/widgets/auth_related_heading.dart';
 import 'package:conferance_app/widgets/custom_loading_button.dart';
@@ -6,10 +7,13 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../signup/signup_screen.dart';
+
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
 
   var margin = EdgeInsets.symmetric(vertical: 5, horizontal: 15);
+  final _userdetailFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,10 +79,8 @@ class ChangePasswordScreen extends StatelessWidget {
                 width: 300.w,
                 borderRadius: 30.r,
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ResetPasswordScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUpScreen()));
                 },
                 condition: false,
                 isLoading: false,

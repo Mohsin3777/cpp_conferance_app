@@ -1,5 +1,6 @@
 import 'package:conferance_app/screens/auth/resetpassword/change_password.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
+import 'package:conferance_app/screens/bottombar/custom_bottom_bar.dart';
 import 'package:conferance_app/screens/intro/intro_screen.dart';
 import 'package:conferance_app/screens/splash/splash_screen.dart';
 import 'package:conferance_app/theme/theme.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
             theme: MyTheme.lightTheme(),
             // home: ResetPasswordScreen(),
             // home: ChangePasswordScreen()
-            home: SplashScreen(),
+            home: CustomBottomNavigationBar(),
           );
         });
   }

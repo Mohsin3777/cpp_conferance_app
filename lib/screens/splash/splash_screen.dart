@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // navigateToStartingScreen(context);
+    navigateToStartingScreen(context);
     return Scaffold(
       body: Container(
         color: Colors.white,

@@ -99,6 +99,8 @@ class _LoginFormState extends State<LoginForm> {
             height: 60.h,
             width: 280.w,
             borderRadius: 30.r,
+            color: Colors.white,
+            textColor: AppConstants.CONSTANT_COLOR,
             onPressed: () {
               Navigator.push(
                   context,

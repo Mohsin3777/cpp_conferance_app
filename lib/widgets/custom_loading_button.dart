@@ -52,11 +52,13 @@ class _CustomLoadingButtonState extends State<CustomLoadingButton> {
               width: 21,
               child: CircularProgressIndicator(
                   strokeWidth: 3, color: Theme.of(context).dividerColor))
-          : Text(widget.text,
+          : Text(
+              widget.text,
               style: TextStyle(
-                  color: widget.color ?? Colors.white,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w700)),
+                  color: widget.textColor ?? Colors.white,
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.w700),
+            ),
     );
   }
 }

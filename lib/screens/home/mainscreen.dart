@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conferance_app/constants/app_constant.dart';
+import 'package:conferance_app/screens/drawer/drawer_screen.dart';
 import 'package:conferance_app/screens/home/widgers/customImage_slider.dart';
+import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,9 +16,13 @@ import '../../utils/text_field_decoration.dart';
 import '../../widgets/custom_notification_with_dot.dart';
 
 class MainScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawerScreen(),
       body: Container(
         color: AppConstants.CONSTANT_COLOR,
         width: 1.sw,
@@ -24,9 +30,14 @@ class MainScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 350.h,
-                color: AppConstants.CONSTANT_COLOR,
-                child: Column(
+                decoration: BoxDecoration(
+                    color: AppConstants.CONSTANT_COLOR,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/home_image.png'),
+                        alignment: Alignment.topRight)),
+                height: 370.h,
+                child: ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: [
                     SizedBox(
                       height: 40.h,
@@ -36,9 +47,14 @@ class MainScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.menu,
-                            color: Colors.white,
+                          InkWell(
+                            onTap: () {
+                              _scaffoldKey.currentState!.openDrawer();
+                            },
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                            ),
                           ),
                           NotificationIconWithDot(),
                         ],
@@ -73,10 +89,17 @@ class MainScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          CircleAvatar(
-                            radius: 35.r,
-                            backgroundColor: Colors.white,
-                          )
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
+                                  fit: BoxFit.cover,
+                                )),
+                            width: 80.w,
+                            height: 80.h,
+                          ),
                         ],
                       ),
                     ),
@@ -115,6 +138,7 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 20.h),
               Container(
                 height: 300.h,
                 padding: EdgeInsets.all(10),
@@ -156,23 +180,18 @@ class MainScreen extends StatelessWidget {
               ),
               Container(
                 color: Colors.white,
-                height: 150.h,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 139.w,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'))),
-                    )
-                  ],
-                ),
-              ),
+                height: 600.h,
+                child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return CustomHomeScreenCard();
+                    }),
+              )
             ],
           ),
         ),
       ),
+
     );
   }
 }

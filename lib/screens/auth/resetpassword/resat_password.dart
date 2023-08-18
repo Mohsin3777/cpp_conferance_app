@@ -1,4 +1,5 @@
 import 'package:conferance_app/screens/auth/resetpassword/change_password.dart';
+import 'package:conferance_app/screens/auth/signup/signup_screen.dart';
 import 'package:conferance_app/screens/home/mainscreen.dart';
 import 'package:conferance_app/utils/text_field_decoration.dart';
 import 'package:conferance_app/widgets/auth_related_heading.dart';
@@ -78,8 +79,10 @@ class ResetPasswordScreen extends StatelessWidget {
                 width: 300.w,
                 borderRadius: 30.r,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangePasswordScreen()));
                 },
                 condition: false,
                 isLoading: false,
