@@ -14,7 +14,10 @@ class CustomDrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: SvgPicture.asset(svgImgPath),
+      leading: SvgPicture.asset(
+        svgImgPath,
+        color: Colors.black,
+      ),
       title: Text(
         text,
         style: TextStyle(

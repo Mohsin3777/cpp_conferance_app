@@ -1,5 +1,6 @@
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
+import 'package:conferance_app/screens/events/event_screen.dart';
 import 'package:conferance_app/screens/home/mainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -17,8 +18,8 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   List<Widget> pages = [
     MainScreen(),
+    EventScreen(),
     ResetPasswordScreen(),
-    MainScreen(),
     MainScreen(),
   ];
   int _selectedIndex = 0;
@@ -46,20 +47,29 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          selectedIconTheme: IconThemeData(color: AppConstants.CONSTANT_COLOR),
+          backgroundColor: Colors.white,
+          // selectedIconTheme: IconThemeData(color: AppConstants.CONSTANT_COLOR),
+          selectedItemColor: AppConstants.CONSTANT_COLOR,
+          unselectedItemColor: Colors.black,
           onTap: (index) {
             _incrementTab(index);
           },
           items: [
             BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/svg/bottom_bar_image1.svg',
-                    color: AppConstants.CONSTANT_COLOR),
+                icon: SvgPicture.asset(
+                  'assets/svg/bottom_bar_image1.svg',
+                  // color: AppConstants.CONSTANT_COLOR
+                ),
                 label: ''
                 // label: 'Calls',
                 ),
             BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/svg/bottom_bar_image2.svg'),
-                label: ''),
+                icon: SvgPicture.asset(
+                  'assets/svg/bottom_bar_image2.svg',
+                  // color: Colors.black,
+                ),
+                label: '',
+                backgroundColor: Colors.black),
             BottomNavigationBarItem(
                 icon: SvgPicture.asset('assets/svg/bottom_bar_image3.svg'),
                 label: ''),

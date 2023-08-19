@@ -1,18 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:conferance_app/constants/app_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../constants/app_constant.dart';
-
-class CustomHomeScreenCard extends StatelessWidget {
-  final Color? backgroundColor;
-
-  final String? screenName;
-  const CustomHomeScreenCard({
+class CustomUpcomingEvent extends StatelessWidget {
+  final bool? isBookmarked;
+  const CustomUpcomingEvent({
     Key? key,
-    this.backgroundColor,
-    this.screenName,
+    this.isBookmarked = false,
   }) : super(key: key);
 
   @override
@@ -20,7 +15,7 @@ class CustomHomeScreenCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       // height: 170.h,
-      color: backgroundColor ?? Colors.white,
+      color: Colors.white,
       child: Row(
         children: [
           _cardImage(
@@ -35,34 +30,26 @@ class CustomHomeScreenCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '1.4 KM',
+                      '18 March, 2021',
                       style: TextStyle(
-                        color: Color(0xffACB1D9),
+                        color: AppConstants.CONSTANT_COLOR,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Divider(
-                      color: Colors.black,
-                    ),
+                    isBookmarked == true
+                        ? Icon(Icons.bookmark)
+                        : Icon(Icons.bookmark_outline)
                   ],
-                ),
-                Text(
-                  '18 March, 2021',
-                  style: TextStyle(
-                    color: AppConstants.CONSTANT_COLOR,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
                 Text(
-                  '4th International Engineering Conference Deans',
+                  'Magical Writer 2021',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18.sp,
@@ -95,7 +82,22 @@ class CustomHomeScreenCard extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                CustomGradientColorButton()
+                Row(
+                  children: [
+                    ImageStack(),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '10+ Going',
+                      style: TextStyle(
+                        color: AppConstants.CONSTANT_COLOR,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           )
@@ -113,68 +115,39 @@ class CustomHomeScreenCard extends StatelessWidget {
           image:
               DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(25.r)),
-      child: Container(
-          margin: EdgeInsets.only(left: 5.w, top: 5.h),
-          width: 40.w,
-          height: 56.h,
-          // padding: EdgeInsets.all(40),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.white,
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(18.r),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '21',
-                style: TextStyle(
-                  color: Color(0xff747092),
-                  fontSize: 19.sp,
-                ),
-              ),
-              Text(
-                'Mar',
-                style: TextStyle(
-                  color: Color(0xff747092),
-                  fontSize: 9.sp,
-                ),
-              )
-            ],
-          )),
     );
   }
 }
 
-class CustomGradientColorButton extends StatelessWidget {
-  const CustomGradientColorButton({
-    Key? key,
-  }) : super(key: key);
 
+
+class ImageStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return FittedBox(
       child: Container(
-          alignment: Alignment.center,
-          height: 40,
-          width: 116.w,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xff029899),
-              Color(0xff31AC8B),
-              Color(0xff61C17C)
-            ]),
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Text(
-            'View Event',
-            style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.white),
+          // padding: const EdgeInsets.all(8.0),
+          height: 40.0.h,
+          width: 80.0.w,
+          // alignment: FractionalOffset.center,
+          child: Stack(
+            //alignment:new Alignment(x, y)
+            children: <Widget>[
+              _imageCircle(),
+              _imageCircle(leftSpace: 20.r),
+              _imageCircle(leftSpace: 40.r),
+            ],
           )),
     );
+  }
+
+  _imageCircle({double? leftSpace}) {
+    return Positioned(
+        left: leftSpace ?? 0,
+        child: CircleAvatar(
+          radius: 20.r,
+          backgroundImage: NetworkImage(
+              'https://plus.unsplash.com/premium_photo-1669703777437-27602d656c27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'),
+        ));
   }
 }

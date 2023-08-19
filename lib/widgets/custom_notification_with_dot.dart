@@ -2,7 +2,9 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 class NotificationIconWithDot extends StatelessWidget {
-  const NotificationIconWithDot({
+  Color? iconColor;
+  NotificationIconWithDot({
+    this.iconColor,
     Key? key,
   }) : super(key: key);
 
@@ -16,9 +18,9 @@ class NotificationIconWithDot extends StatelessWidget {
           end: 1,
         ),
         badgeContent: const Text(''),
-        child: const Icon(
+        child: Icon(
           Icons.notifications_outlined,
-          color: Colors.white,
+          color: iconColor ?? Colors.white,
           size: 25,
         ),
       ),
