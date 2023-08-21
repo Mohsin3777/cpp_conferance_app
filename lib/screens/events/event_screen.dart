@@ -102,9 +102,7 @@ class _EventScreenState extends State<EventScreen>
             SizedBox(
               height: 20.h,
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+          
             Expanded(
               // height: 200,
               child: TabBarView(controller: tabController, children: [

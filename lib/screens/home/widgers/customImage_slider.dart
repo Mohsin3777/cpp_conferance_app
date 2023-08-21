@@ -21,15 +21,7 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
     // 'https://images.unsplash.com/photo-1586943101559-4cdcf86a6f87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1556&q=80',
     // 'https://images.unsplash.com/photo-1586951144438-26d4e072b891?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
     // 'https://images.unsplash.com/photo-1586953983027-d7508a64f4bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-    Container(
-      width: 1.sw,
-      child: Image(
-        image: NetworkImage(
-          'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
-        ),
-        fit: BoxFit.cover,
-      ),
-    ),
+
     Container(
       width: 1.sw,
       child: Image(
@@ -52,7 +44,9 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
       body: Column(
         children: [
           CarouselSlider(
-              items: images,
+              items: List.generate(10, (index) {
+                return _imageContainer();
+              }),
               options: CarouselOptions(
                 height: 250.h,
 
@@ -75,11 +69,26 @@ class _CustomImageSliderState extends State<CustomImageSlider> {
                 scrollDirection: Axis.horizontal,
               )),
           DotsIndicator(
-            dotsCount: images.length,
+            // dotsCount: images.length,
+            dotsCount: 10,
             position: currentIndex.toDouble(),
           )
         ],
       ),
+    );
+  }
+
+  _imageContainer() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24.r),
+          image: DecorationImage(
+            image: NetworkImage(
+              'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
+            ),
+            fit: BoxFit.cover,
+          )),
+      width: 1.sw,
     );
   }
 }

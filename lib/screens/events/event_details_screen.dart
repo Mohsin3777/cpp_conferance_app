@@ -2,6 +2,8 @@ import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/events/widgets/custom_event_heading.dart';
 import 'package:conferance_app/screens/events/widgets/custom_expandableTile.dart';
 import 'package:conferance_app/screens/events/widgets/custom_readmore_text_widget.dart';
+import 'package:conferance_app/screens/events/widgets/upcoming_event_card.dart';
+import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -129,7 +131,7 @@ class EventDetailsScreen extends StatelessWidget {
                   '+92 Are Going',
                   style:
                       TextStyle(fontWeight: FontWeight.w600, fontSize: 11.sp),
-                )
+                ),
               ],
             ),
             SizedBox(
@@ -165,6 +167,30 @@ class EventDetailsScreen extends StatelessWidget {
             //   ),
             // ),
             CustomExpandableTile(),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ImageStack(),
+                SizedBox(
+                  width: 2.w,
+                ),
+                Text(
+                  '+92 Are Going',
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 12.sp),
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                CustomSvgIconButton(
+                  backgroundColor: Color(0xffFB0201),
+                  svgIcon: 'assets/svg/play_svg_icon.svg',
+                ),
+              ],
+            )
           ],
         )),
       ),

@@ -48,7 +48,7 @@ class CustomEventTab extends StatelessWidget {
         children: [
           FittedBox(
             child: Text(
-              "First",
+              tabText ?? '',
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w700),
             ),
           ),

@@ -47,9 +47,10 @@ class CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      tileColor: Color(0xffDCFCFC),
       title: Text(
         title ?? '',
-        style: TextStyle(fontWeight: FontWeight.w700),
+        style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xff029899)),
       ),
       subtitle: Text(subtitle ?? ''),
     );

@@ -3,6 +3,7 @@ import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
 import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/events/event_screen.dart';
 import 'package:conferance_app/screens/home/mainscreen.dart';
+import 'package:conferance_app/screens/sponsers/sponsers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -21,7 +22,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     MainScreen(),
     EventScreen(),
     EventDetailsScreen(),
-    MainScreen(),
+    SponserScreen(),
   ];
   int _selectedIndex = 0;
   void _incrementTab(index) {
