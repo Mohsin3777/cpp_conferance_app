@@ -1,6 +1,7 @@
 import 'package:conferance_app/screens/auth/resetpassword/change_password.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
 import 'package:conferance_app/screens/bottombar/custom_bottom_bar.dart';
+import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/intro/intro_screen.dart';
 import 'package:conferance_app/screens/splash/splash_screen.dart';
 import 'package:conferance_app/theme/theme.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
             // home: ResetPasswordScreen(),
             // home: ChangePasswordScreen()
             home: CustomBottomNavigationBar(),
+            // home: Calender(),
+            // home: EventDetailsScreen(),
           );
         });
   }

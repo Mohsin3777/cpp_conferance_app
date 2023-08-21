@@ -29,14 +29,15 @@ class CustomTabBar extends StatelessWidget {
           //   CustomEventTab(tabController: tabController),
           //   CustomEventTab(tabController: tabController),
           // ]
+          //
           tabs: tabs,
         ));
   }
 }
 
 class CustomEventTab extends StatelessWidget {
-  final String? tabText;
   final TabController? tabController;
+  final String? tabText;
   const CustomEventTab({super.key, this.tabController, this.tabText});
 
   @override
@@ -47,7 +48,7 @@ class CustomEventTab extends StatelessWidget {
         children: [
           FittedBox(
             child: Text(
-              tabText!,
+              "First",
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w700),
             ),
           ),

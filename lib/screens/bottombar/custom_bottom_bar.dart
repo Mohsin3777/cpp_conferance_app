@@ -1,5 +1,6 @@
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
+import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/events/event_screen.dart';
 import 'package:conferance_app/screens/home/mainscreen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   List<Widget> pages = [
     MainScreen(),
     EventScreen(),
-    ResetPasswordScreen(),
+    EventDetailsScreen(),
     MainScreen(),
   ];
   int _selectedIndex = 0;

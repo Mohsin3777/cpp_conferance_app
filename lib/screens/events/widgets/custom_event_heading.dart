@@ -10,7 +10,7 @@ class CustomEventScreenHeading extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.h),
       child: Text(
-        text!,
+        text ?? '',
         style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
