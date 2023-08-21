@@ -48,15 +48,21 @@ class CustomUpcomingEvent extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(
-                  'Magical Writer 2021',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 2,
-                  ),
-                  maxLines: 3,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Magical Writer 2021',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 2,
+                      ),
+                      maxLines: 3,
+                    ),
+                    Icon(Icons.more_vert)
+                  ],
                 ),
                 SizedBox(
                   height: 10.h,
@@ -119,9 +125,8 @@ class CustomUpcomingEvent extends StatelessWidget {
   }
 }
 
-
-
 class ImageStack extends StatelessWidget {
+  List? imagesList;
   @override
   Widget build(BuildContext context) {
     return FittedBox(

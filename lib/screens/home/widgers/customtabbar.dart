@@ -19,22 +19,25 @@ class CustomTabBar extends StatelessWidget {
     return Container(
         height: 40.h,
         child: TabBar(
-            labelStyle: const TextStyle(color: Colors.white),
-            controller: tabController,
-            indicatorColor: Colors.transparent,
-            labelColor: AppConstants.CONSTANT_COLOR,
-            unselectedLabelColor: Colors.black,
-            onTap: ontap,
-            tabs: [
-              CustomEventTab(tabController: tabController),
-              CustomEventTab(tabController: tabController),
-            ]));
+          labelStyle: const TextStyle(color: Colors.white),
+          controller: tabController,
+          indicatorColor: Colors.transparent,
+          labelColor: AppConstants.CONSTANT_COLOR,
+          unselectedLabelColor: Colors.black,
+          onTap: ontap,
+          // tabs: [
+          //   CustomEventTab(tabController: tabController),
+          //   CustomEventTab(tabController: tabController),
+          // ]
+          tabs: tabs,
+        ));
   }
 }
 
 class CustomEventTab extends StatelessWidget {
+  final String? tabText;
   final TabController? tabController;
-  const CustomEventTab({super.key, this.tabController});
+  const CustomEventTab({super.key, this.tabController, this.tabText});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class CustomEventTab extends StatelessWidget {
         children: [
           FittedBox(
             child: Text(
-              "First",
+              tabText!,
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w700),
             ),
           ),

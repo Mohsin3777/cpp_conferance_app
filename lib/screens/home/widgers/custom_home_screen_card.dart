@@ -4,15 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/app_constant.dart';
+import '../../events/widgets/upcoming_event_card.dart';
 
 class CustomHomeScreenCard extends StatelessWidget {
   final Color? backgroundColor;
+  final Color? textColor;
+  final String? Screentype;
 
   final String? screenName;
   const CustomHomeScreenCard({
     Key? key,
     this.backgroundColor,
     this.screenName,
+    this.textColor,
+    required this.Screentype,
   }) : super(key: key);
 
   @override
@@ -40,20 +45,26 @@ class CustomHomeScreenCard extends StatelessWidget {
                     Text(
                       '1.4 KM',
                       style: TextStyle(
-                        color: Color(0xffACB1D9),
+                        color: textColor ?? Color(0xffACB1D9),
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Divider(
-                      color: Colors.black,
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Expanded(
+                      child: Divider(
+                        thickness: 1.h,
+                        color: textColor ?? Colors.black,
+                      ),
                     ),
                   ],
                 ),
                 Text(
                   '18 March, 2021',
                   style: TextStyle(
-                    color: AppConstants.CONSTANT_COLOR,
+                    color: textColor ?? AppConstants.CONSTANT_COLOR,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                   ),
@@ -64,7 +75,7 @@ class CustomHomeScreenCard extends StatelessWidget {
                 Text(
                   '4th International Engineering Conference Deans',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: textColor ?? Colors.black,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 2,
@@ -78,6 +89,7 @@ class CustomHomeScreenCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       'assets/svg/home_card_location_svg.svg',
+                      color: textColor ?? AppConstants.CONSTANT_COLOR,
                     ),
                     SizedBox(
                       width: 5.w,
@@ -85,7 +97,7 @@ class CustomHomeScreenCard extends StatelessWidget {
                     Text(
                       'Pearl Continental',
                       style: TextStyle(
-                        color: AppConstants.CONSTANT_COLOR,
+                        color: textColor ?? AppConstants.CONSTANT_COLOR,
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w600,
                       ),
@@ -95,7 +107,28 @@ class CustomHomeScreenCard extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                CustomGradientColorButton()
+                screenName == 'home'
+                    ? CustomGradientColorButton()
+                    : Container(
+                        child: Row(
+                          children: [
+                            ImageStack(),
+                            SizedBox(
+                              width: 1.w,
+                            ),
+                            Text(
+                              '10+ Going',
+                              style: TextStyle(
+                                color: textColor ?? AppConstants.CONSTANT_COLOR,
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Spacer(),
+                            SvgPicture.asset('assets/svg/live_svg.svg')
+                          ],
+                        ),
+                      ),
               ],
             ),
           )
@@ -120,7 +153,7 @@ class CustomHomeScreenCard extends StatelessWidget {
           // padding: EdgeInsets.all(40),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: Colors.white,
+            color: Colors.white.withOpacity(0.8),
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(18.r),
           ),

@@ -1,7 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:conferance_app/screens/events/allevent_screen.dart';
+import 'package:conferance_app/screens/events/past_event_screen.dart';
+import 'package:conferance_app/screens/events/saved_event_screen.dart';
+import 'package:conferance_app/screens/events/upcoming_event_screen.dart';
+import 'package:conferance_app/screens/events/widgets/custom_event_heading.dart';
 import 'package:conferance_app/screens/events/widgets/upcoming_event_card.dart';
+import 'package:conferance_app/screens/events/widgets/upcoming_event_text_row.dart';
 import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/customtabbar.dart';
+import 'package:conferance_app/utils/screentype.dart';
 import 'package:conferance_app/widgets/custom_notification_with_dot.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +32,7 @@ class _EventScreenState extends State<EventScreen>
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -74,91 +81,44 @@ class _EventScreenState extends State<EventScreen>
                 setState(() {});
               },
               tabs: [
-                CustomEventTab(tabController: tabController),
-                CustomEventTab(tabController: tabController),
+                CustomEventTab(
+                  tabController: tabController,
+                  tabText: 'All Events',
+                ),
+                CustomEventTab(
+                  tabController: tabController,
+                  tabText: 'Upcoming',
+                ),
+                CustomEventTab(
+                  tabController: tabController,
+                  tabText: 'Past',
+                ),
+                CustomEventTab(
+                  tabController: tabController,
+                  tabText: 'Saved',
+                ),
               ],
             ),
             SizedBox(
               height: 20.h,
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.h),
-              padding: EdgeInsets.all(10.sp),
-              color: Color(0xffF3FFFF),
-              child: Row(
-                children: [
-                  SvgPicture.asset('assets/svg/star_location_svg.svg'),
-                  RichText(
-                    text: TextSpan(
-                        text: '29+ ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12.sp,
-                            color: Color(0xff95BEBE)),
-                        children: [
-                          TextSpan(
-                            text: 'Upcoming events found',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12.sp,
-                                color: Color(0xff95BEBE)),
-                          ),
-                        ]),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            _heading(text: 'Todays Events'),
-            SizedBox(
-              height: 20.h,
-            ),
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.r),
-                  color: AppConstants.CONSTANT_COLOR,
-                ),
-                padding: EdgeInsets.all(5.sp),
-                child: CustomHomeScreenCard(
-                  backgroundColor: AppConstants.CONSTANT_COLOR,
-                )),
-            SizedBox(
-              height: 20.h,
-            ),
-            _heading(text: 'Upcoming Events'),
             SizedBox(
               height: 20.h,
             ),
             Expanded(
               // height: 200,
               child: TabBarView(controller: tabController, children: [
-                ListView.builder(
-                    itemCount: 30,
-                    itemBuilder: (context, index) {
-                      return CustomUpcomingEvent();
-                    }),
-                Center(child: Text('22')),
+                // EventScreen(),
+                // Center(child: Text('22')),
+                AllEventScreen(),
+                UpComingEventScreen(),
+                PastEventScreen(),
+
+                SavedEventScreen(),
               ]),
             )
           ],
         ),
-      ),
-    );
-  }
-
-  _heading({required String text}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.h),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
-            color: Color(0xff16183B),
-            letterSpacing: 2),
       ),
     );
   }

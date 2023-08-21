@@ -5,6 +5,7 @@ import 'package:conferance_app/screens/drawer/drawer_screen.dart';
 import 'package:conferance_app/screens/home/widgers/customImage_slider.dart';
 import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
+import 'package:conferance_app/utils/screentype.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -184,14 +185,15 @@ class MainScreen extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return CustomHomeScreenCard();
+                      return CustomHomeScreenCard(
+                        Screentype: ScreenName.home.toString(),
+                      );
                     }),
               )
             ],
           ),
         ),
       ),
-
     );
   }
 }
