@@ -1,6 +1,7 @@
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/drawer/widgets/drawer_profile_details_widget.dart';
 import 'package:conferance_app/screens/drawer/widgets/drawertile.dart';
+import 'package:conferance_app/screens/sponsers/sponsers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,6 +59,10 @@ class CustomDrawerScreen extends StatelessWidget {
               svgImgPath: 'assets/svg/drawer_icon1.svg',
             ),
             CustomDrawerTile(
+              onpress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SponserScreen()));
+              },
               text: 'Sponsors',
               svgImgPath: 'assets/svg/drawer_icon2.svg',
             ),

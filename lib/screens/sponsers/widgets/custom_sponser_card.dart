@@ -18,7 +18,7 @@ class CustomSponcerCard extends StatelessWidget {
           children: [
             Image(
               image: NetworkImage(
-                  'https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGxvZ298ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
+                  'https://images.unsplash.com/photo-1618914862388-d6b826915414?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI4fHxsb2dvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'),
               fit: BoxFit.cover,
               height: 100.h,
               width: 100.w,

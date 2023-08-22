@@ -41,7 +41,7 @@ class MainScreen extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: 40.h,
+                      height: 20.h,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),

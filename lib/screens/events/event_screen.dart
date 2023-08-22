@@ -19,6 +19,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../widgets/custom_appbar.dart';
+
 class EventScreen extends StatefulWidget {
   const EventScreen({super.key});
 
@@ -46,29 +48,8 @@ class _EventScreenState extends State<EventScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: BackButton(
-          color: Colors.black,
-          onPressed: () {},
-        ),
-        title: Text(
-          'PEC Events',
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-              fontSize: 18.sp),
-        ),
-        centerTitle: true,
-        actions: [
-          NotificationIconWithDot(
-            iconColor: Colors.black,
-          ),
-          SizedBox(
-            width: 10.w,
-          ),
-        ],
+      appBar: CustomAppbar(
+        title: 'Sponser',
       ),
       body: Container(
         height: 1.sh,
@@ -102,7 +83,6 @@ class _EventScreenState extends State<EventScreen>
             SizedBox(
               height: 20.h,
             ),
-          
             Expanded(
               // height: 200,
               child: TabBarView(controller: tabController, children: [
