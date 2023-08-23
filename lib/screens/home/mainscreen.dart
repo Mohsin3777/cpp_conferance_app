@@ -1,20 +1,16 @@
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conferance_app/constants/app_constant.dart';
+import 'package:conferance_app/screens/commitee_members/commitee_member_screen.dart';
 import 'package:conferance_app/screens/drawer/drawer_screen.dart';
 import 'package:conferance_app/screens/home/widgers/customImage_slider.dart';
 import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
 import 'package:conferance_app/utils/screentype.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../utils/text_field_decoration.dart';
-import '../../widgets/custom_notification_with_dot.dart';
+import 'package:badges/badges.dart' as badges;
 
 class MainScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -57,7 +53,21 @@ class MainScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          NotificationIconWithDot(),
+                          Container(
+                            child: badges.Badge(
+                              position: badges.BadgePosition.custom(
+                                bottom: 0,
+                                top: 10,
+                                end: 1,
+                              ),
+                              badgeContent: const Text(''),
+                              child: Icon(
+                                Icons.notifications_outlined,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -92,11 +102,12 @@ class MainScreen extends StatelessWidget {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.r),
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(30.r),
                                 image: DecorationImage(
                                   image: NetworkImage(
                                       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 )),
                             width: 80.w,
                             height: 80.h,
@@ -123,15 +134,29 @@ class MainScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(children: [
                         CustomSvgIconButton(
+                          title: 'Live Event',
                           backgroundColor: Color(0xff5ED600),
                           svgIcon: 'assets/svg/play_svg_icon.svg',
                         ),
                         CustomSvgIconButton(
+                          title: 'Pictures',
                           backgroundColor: Color(0xffFDAE39),
                           svgIcon: 'assets/svg/image_svg_icon.svg',
                         ),
                         CustomSvgIconButton(
+                          title: 'Sponsor',
                           backgroundColor: Color(0xff959EED),
+                          svgIcon: 'assets/svg/handshake_svg_icon.svg',
+                        ),
+                        CustomSvgIconButton(
+                          title: 'Committee',
+                          onpress: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return CommiteeMemberScreen();
+                            }));
+                          },
+                          backgroundColor: Colors.red,
                           svgIcon: 'assets/svg/handshake_svg_icon.svg',
                         ),
                       ]),

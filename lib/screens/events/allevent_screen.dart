@@ -1,3 +1,4 @@
+import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/events/widgets/custom_event_heading.dart';
 import 'package:conferance_app/screens/events/widgets/upcoming_event_card.dart';
 import 'package:conferance_app/screens/events/widgets/upcoming_event_text_row.dart';
@@ -36,6 +37,11 @@ class AllEventScreen extends StatelessWidget {
               ),
               padding: EdgeInsets.all(5.sp),
               child: CustomHomeScreenCard(
+                onpress: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return EventDetailsScreen();
+                  }));
+                },
                 Screentype: ScreenName.event.toString(),
                 backgroundColor: AppConstants.CONSTANT_COLOR,
                 textColor: Colors.white,

@@ -35,7 +35,9 @@ class LoginScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                   width: 1.sw,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(33.r),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(33.r),
+                        topRight: Radius.circular(33.r)),
                     color: AppConstants.CONSTANT_COLOR,
                   ),
                   child: Column(
@@ -46,9 +48,7 @@ class LoginScreen extends StatelessWidget {
                       _customBottomText(
                         normalText: 'Doesn’t have an account? ',
                         highlightedText: 'Register Here',
-                        onpress: () {
-                     
-                        },
+                        onpress: () {},
                       ),
                     ],
                   ),

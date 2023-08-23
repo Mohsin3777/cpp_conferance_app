@@ -31,14 +31,13 @@ class _IntroScreenState extends State<IntroScreen> {
 
       globalBackgroundColor: Colors.white,
       // allowImplicitScrolling: true,
-      autoScrollDuration: 3000,
+      autoScrollDuration: 1000,
       // infiniteAutoScroll: true,
       globalHeader: Text('aa'),
 
       pages: [
         PageViewModel(title: '', bodyWidget: IntroFirstScreen()),
-        PageViewModel(
-            title: 'Page Two', bodyWidget: const Text('That\'s all folks'))
+        PageViewModel(title: '', bodyWidget: IntroFirstScreen()),
       ],
       globalFooter: SizedBox(
         width: double.infinity,

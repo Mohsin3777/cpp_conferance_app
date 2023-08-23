@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
             theme: MyTheme.lightTheme(),
             // home: ResetPasswordScreen(),
             // home: ChangePasswordScreen()
-            home: CustomBottomNavigationBar(),
-            // home: Calender(),
+            // home: CustomBottomNavigationBar(),
+            home: SplashScreen(),
             // home: EventDetailsScreen(),
           );
         });

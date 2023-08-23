@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../widgets/custom_loading_button.dart';
+import '../../../bottombar/custom_bottom_bar.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -105,7 +106,7 @@ class _LoginFormState extends State<LoginForm> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ResetPasswordScreen()));
+                      builder: (context) => CustomBottomNavigationBar()));
             },
             condition: false,
             isLoading: false,

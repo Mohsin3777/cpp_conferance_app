@@ -1,6 +1,8 @@
 import 'package:conferance_app/constants/app_constant.dart';
+import 'package:conferance_app/screens/about/about_us_screen.dart';
 import 'package:conferance_app/screens/drawer/widgets/drawer_profile_details_widget.dart';
 import 'package:conferance_app/screens/drawer/widgets/drawertile.dart';
+import 'package:conferance_app/screens/gallery/gallery_screen.dart';
 import 'package:conferance_app/screens/sponsers/sponsers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,14 +38,14 @@ class CustomDrawerScreen extends StatelessWidget {
             ),
             Container(
                 padding: EdgeInsets.all(10),
-                height: 200.h,
+                // height: 200.h,
                 decoration: BoxDecoration(),
                 child: Container(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
                       DrawerProfileWidget(),
                       SizedBox(
                         height: 10.h,
@@ -67,6 +69,12 @@ class CustomDrawerScreen extends StatelessWidget {
               svgImgPath: 'assets/svg/drawer_icon2.svg',
             ),
             CustomDrawerTile(
+              onpress: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GalleryHomeScreen()));
+              },
               text: 'Gallery',
               svgImgPath: 'assets/svg/image_svg_icon.svg',
             ),
@@ -75,6 +83,10 @@ class CustomDrawerScreen extends StatelessWidget {
               svgImgPath: 'assets/svg/drawer_icon4.svg',
             ),
             CustomDrawerTile(
+              onpress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AboutUsScreen()));
+              },
               text: 'About',
               svgImgPath: 'assets/svg/drawer_icon5.svg',
             ),

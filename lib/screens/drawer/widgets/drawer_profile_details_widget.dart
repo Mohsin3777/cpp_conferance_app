@@ -17,14 +17,14 @@ class DrawerProfileWidget extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.r),
+                    borderRadius: BorderRadius.circular(30.r),
                     image: DecorationImage(
                       image: NetworkImage(
                           'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     )),
                 width: 100.w,
-                height: 120.h,
+                height: 100.h,
               ),
             ],
           ),
@@ -34,15 +34,17 @@ class DrawerProfileWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'John Doe',
-                style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff222222)),
+              FittedBox(
+                child: Text(
+                  'John Doe',
+                  style: TextStyle(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff222222)),
+                ),
               ),
               SizedBox(
-                height: 10.h,
+                height: 6.h,
               ),
               Text(
                 'mamafoagajgoa@ggg.com',
@@ -52,7 +54,7 @@ class DrawerProfileWidget extends StatelessWidget {
                     color: Color(0xff222222)),
               ),
               SizedBox(
-                height: 10.h,
+                height: 6.h,
               ),
               Text(
                 '11111111',
@@ -70,8 +72,8 @@ class DrawerProfileWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: AppConstants.CONSTANT_COLOR,
                       borderRadius: BorderRadius.circular(30.r)),
-                  width: 100.w,
-                  height: 40.h,
+                  width: 94.w,
+                  height: 30.h,
                   alignment: Alignment.center,
                   child: FittedBox(
                     child: Text(

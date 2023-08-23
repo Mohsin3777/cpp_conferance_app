@@ -7,35 +7,42 @@ import '../../../constants/app_constant.dart';
 class CustomSvgIconButton extends StatelessWidget {
   Color? backgroundColor;
   final String svgIcon;
+  final String? title;
+  final VoidCallback? onpress;
 
   CustomSvgIconButton({
     Key? key,
     required this.svgIcon,
     this.backgroundColor,
+    this.onpress,
+    this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5.w),
-      decoration: BoxDecoration(
-          color: backgroundColor ?? AppConstants.CONSTANT_COLOR,
-          borderRadius: BorderRadius.circular(10.r)),
-      width: 140.w,
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SvgPicture.asset(svgIcon),
-          Text(
-            'Play Event',
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          )
-        ],
+    return InkWell(
+      onTap: onpress,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        decoration: BoxDecoration(
+            color: backgroundColor ?? AppConstants.CONSTANT_COLOR,
+            borderRadius: BorderRadius.circular(37.r)),
+        width: 140.w,
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SvgPicture.asset(svgIcon),
+            Text(
+              title ?? 'Play Event',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

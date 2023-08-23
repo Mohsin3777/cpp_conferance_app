@@ -10,6 +10,7 @@ class CustomHomeScreenCard extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final String? Screentype;
+  final VoidCallback? onpress;
 
   final String? screenName;
   const CustomHomeScreenCard({
@@ -18,121 +19,126 @@ class CustomHomeScreenCard extends StatelessWidget {
     this.screenName,
     this.textColor,
     required this.Screentype,
+    this.onpress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-      // height: 170.h,
-      color: backgroundColor ?? Colors.white,
-      child: Row(
-        children: [
-          _cardImage(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'),
-          SizedBox(
-            width: 10.w,
-          ),
-          Expanded(
-            // width: 200.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      '1.4 KM',
-                      style: TextStyle(
-                        color: textColor ?? Color(0xffACB1D9),
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1.h,
-                        color: textColor ?? Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '18 March, 2021',
-                  style: TextStyle(
-                    color: textColor ?? AppConstants.CONSTANT_COLOR,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  '4th International Engineering Conference Deans',
-                  style: TextStyle(
-                    color: textColor ?? Colors.black,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 2,
-                  ),
-                  maxLines: 3,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/svg/home_card_location_svg.svg',
-                      color: textColor ?? AppConstants.CONSTANT_COLOR,
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text(
-                      'Pearl Continental',
-                      style: TextStyle(
-                        color: textColor ?? AppConstants.CONSTANT_COLOR,
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                screenName == 'home'
-                    ? CustomGradientColorButton()
-                    : Container(
-                        child: Row(
-                          children: [
-                            ImageStack(),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            Text(
-                              '10+ Going',
-                              style: TextStyle(
-                                color: textColor ?? AppConstants.CONSTANT_COLOR,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Spacer(),
-                            SvgPicture.asset('assets/svg/live_svg.svg')
-                          ],
+    return InkWell(
+      onTap: onpress ?? () {},
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        // height: 170.h,
+        color: backgroundColor ?? Colors.white,
+        child: Row(
+          children: [
+            _cardImage(
+                imageUrl:
+                    'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'),
+            SizedBox(
+              width: 10.w,
+            ),
+            Expanded(
+              // width: 200.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        '1.4 KM',
+                        style: TextStyle(
+                          color: textColor ?? Color(0xffACB1D9),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-              ],
-            ),
-          )
-        ],
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.h,
+                          color: textColor ?? Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '18 March, 2021',
+                    style: TextStyle(
+                      color: textColor ?? AppConstants.CONSTANT_COLOR,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    '4th International Engineering Conference Deans',
+                    style: TextStyle(
+                      color: textColor ?? Colors.black,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 2,
+                    ),
+                    maxLines: 3,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svg/home_card_location_svg.svg',
+                        color: textColor ?? AppConstants.CONSTANT_COLOR,
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text(
+                        'Pearl Continental',
+                        style: TextStyle(
+                          color: textColor ?? AppConstants.CONSTANT_COLOR,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  screenName == 'home'
+                      ? CustomGradientColorButton()
+                      : Container(
+                          child: Row(
+                            children: [
+                              ImageStack(),
+                              SizedBox(
+                                width: 1.w,
+                              ),
+                              Text(
+                                '10+ Going',
+                                style: TextStyle(
+                                  color:
+                                      textColor ?? AppConstants.CONSTANT_COLOR,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Spacer(),
+                              SvgPicture.asset('assets/svg/live_svg.svg')
+                            ],
+                          ),
+                        ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -13,7 +13,7 @@ class NotificationIconWithDot extends StatelessWidget {
     return Container(
       child: badges.Badge(
         position: badges.BadgePosition.custom(
-          bottom: 0,
+          bottom: 20,
           top: 10,
           end: 1,
         ),
