@@ -4,6 +4,7 @@ import 'package:conferance_app/screens/drawer/drawer_screen.dart';
 import 'package:conferance_app/screens/home/widgers/customImage_slider.dart';
 import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
+import 'package:conferance_app/screens/notification/notification_screen.dart';
 import 'package:conferance_app/utils/screentype.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,8 @@ class MainScreen extends StatelessWidget {
                     image: DecorationImage(
                         image: AssetImage('assets/images/home_image.png'),
                         alignment: Alignment.topRight)),
-                height: 370.h,
+                // height: 370.h,
+                height: 350.h,
                 child: ListView(
                   physics: NeverScrollableScrollPhysics(),
                   children: [
@@ -40,7 +42,8 @@ class MainScreen extends StatelessWidget {
                       height: 20.h,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.h, vertical: 10.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -53,18 +56,26 @@ class MainScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          Container(
-                            child: badges.Badge(
-                              position: badges.BadgePosition.custom(
-                                bottom: 0,
-                                top: 10,
-                                end: 1,
-                              ),
-                              badgeContent: const Text(''),
-                              child: Icon(
-                                Icons.notifications_outlined,
-                                color: Colors.white,
-                                size: 25,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return NotifcationScreen();
+                              }));
+                            },
+                            child: Container(
+                              child: badges.Badge(
+                                position: badges.BadgePosition.custom(
+                                  bottom: 0,
+                                  top: 10,
+                                  end: 1,
+                                ),
+                                badgeContent: const Text(''),
+                                child: Icon(
+                                  Icons.notifications_outlined,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
                               ),
                             ),
                           )
@@ -93,10 +104,10 @@ class MainScreen extends StatelessWidget {
                               Text(
                                 'JOHN DOE,',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.sp,
-                                ),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    // fontSize: 30.sp,
+                                    fontSize: 27.sp),
                               ),
                             ],
                           ),
