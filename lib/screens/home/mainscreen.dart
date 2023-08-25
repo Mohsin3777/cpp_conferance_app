@@ -1,10 +1,12 @@
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/commitee_members/commitee_member_screen.dart';
 import 'package:conferance_app/screens/drawer/drawer_screen.dart';
+import 'package:conferance_app/screens/gallery/gallery_screen.dart';
 import 'package:conferance_app/screens/home/widgers/customImage_slider.dart';
 import 'package:conferance_app/screens/home/widgers/custom_home_screen_card.dart';
 import 'package:conferance_app/screens/home/widgers/custom_svg_icon_button.dart';
 import 'package:conferance_app/screens/notification/notification_screen.dart';
+import 'package:conferance_app/screens/sponsers/sponsers_screen.dart';
 import 'package:conferance_app/utils/screentype.dart';
 import 'package:flutter/material.dart';
 
@@ -133,6 +135,7 @@ class MainScreen extends StatelessWidget {
                         decoration:
                             TextFeildDecorationClass.inputDecoration(context,
                                 hintText: 'Search Event',
+                                padding: 16.h,
                                 suffixIcon: Icon(
                                   Icons.search,
                                   color: Colors.grey,
@@ -153,11 +156,23 @@ class MainScreen extends StatelessWidget {
                           title: 'Pictures',
                           backgroundColor: Color(0xffFDAE39),
                           svgIcon: 'assets/svg/image_svg_icon.svg',
+                          onpress: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return GalleryHomeScreen();
+                            }));
+                          },
                         ),
                         CustomSvgIconButton(
                           title: 'Sponsor',
                           backgroundColor: Color(0xff959EED),
                           svgIcon: 'assets/svg/handshake_svg_icon.svg',
+                          onpress: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SponserScreen();
+                            }));
+                          },
                         ),
                         CustomSvgIconButton(
                           title: 'Committee',

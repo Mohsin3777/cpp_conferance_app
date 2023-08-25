@@ -86,8 +86,8 @@ class SponserScreen extends StatelessWidget {
                 // implement GridView.builder
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200.h,
-                        childAspectRatio: 4 / 4,
+                        maxCrossAxisExtent: 180.h,
+                        childAspectRatio: 4 / 3,
                         crossAxisSpacing: 0,
                         mainAxisSpacing: 10.h),
                     itemCount: 10,

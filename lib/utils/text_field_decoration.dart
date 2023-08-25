@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFeildDecorationClass {
-  static InputDecoration inputDecoration(
-    BuildContext context, {
-    required String hintText,
-    String? labelText,
-    Widget? suffixIcon,
-    Icon? prefixIcon,
-  }) {
+  static InputDecoration inputDecoration(BuildContext context,
+      {required String hintText,
+      String? labelText,
+      Widget? suffixIcon,
+      Icon? prefixIcon,
+      double? padding}) {
     return InputDecoration(
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
@@ -27,7 +26,7 @@ class TextFeildDecorationClass {
         filled: true,
         isDense: true,
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            EdgeInsets.symmetric(horizontal: 20, vertical: padding ?? 20),
 
         // filled: true,
         fillColor: Colors.white,

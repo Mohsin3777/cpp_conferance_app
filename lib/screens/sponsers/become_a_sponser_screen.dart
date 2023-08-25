@@ -7,6 +7,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../widgets/custom_notification_with_dot.dart';
+
 class BecomeASponserScreen extends StatefulWidget {
   const BecomeASponserScreen({super.key});
 
@@ -19,9 +21,35 @@ class _BecomeASponserScreenState extends State<BecomeASponserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
-        title: 'Become a Sponsor',
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          'Become a Sponsor',
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+              fontSize: 18.sp),
+        ),
+        centerTitle: true,
+        actions: [
+          NotificationIconWithDot(
+            iconColor: Colors.black,
+          ),
+          SizedBox(
+            width: 10.w,
+          ),
+        ],
       ),
+      // appBar: CustomAppbar(
+      //   title: ,
+      // ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
