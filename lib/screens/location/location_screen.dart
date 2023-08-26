@@ -13,7 +13,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController>? _controller = Completer();
 
   static final CameraPosition _kGooglePlex =
       CameraPosition(target: LatLng(33.6841, 72.9734), zoom: 14);
@@ -21,6 +21,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
+    // _controller!.complete();
     super.dispose();
   }
 
@@ -57,8 +58,8 @@ class _LocationScreenState extends State<LocationScreen> {
           myLocationEnabled: true,
           markers: Set<Marker>.of(_marker),
           compassEnabled: true,
-          onMapCreated: ((GoogleMapController controller) =>
-              _controller.complete()),
+          onMapCreated: ((GoogleMapController? controller) =>
+              _controller!.complete()),
         ),
       ),
       // floatingActionButton: FloatingActionButton(

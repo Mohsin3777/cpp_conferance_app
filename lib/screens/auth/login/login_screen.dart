@@ -1,6 +1,7 @@
 import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/screens/auth/login/widget/login_form.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
+import 'package:conferance_app/screens/auth/signup/signup_screen.dart';
 import 'package:conferance_app/utils/text_field_decoration.dart';
 import 'package:conferance_app/widgets/custom_loading_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +49,12 @@ class LoginScreen extends StatelessWidget {
                       _customBottomText(
                         normalText: 'Doesn’t have an account? ',
                         highlightedText: 'Register Here',
-                        onpress: () {},
+                        onpress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpScreen()));
+                        },
                       ),
                     ],
                   ),
