@@ -4,6 +4,7 @@ import 'package:conferance_app/screens/bottombar/custom_bottom_bar.dart';
 import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/intro/intro_screen.dart';
 import 'package:conferance_app/screens/splash/splash_screen.dart';
+import 'package:conferance_app/screens/time_line_calender.dart';
 import 'package:conferance_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
             // home: ResetPasswordScreen(),
             // home: ChangePasswordScreen()
             // home: CustomBottomNavigationBar(),
-            home: SplashScreen(),
+            // home: SplashScreen(),
             // home: EventDetailsScreen(),
+            home: TimeLineCalenderPractice(),
           );
         });
   }
