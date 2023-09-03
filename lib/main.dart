@@ -1,10 +1,6 @@
+import 'package:conferance_app/practice/add_event.dart';
 import 'package:conferance_app/providers/auth_provider.dart';
-import 'package:conferance_app/screens/auth/resetpassword/change_password.dart';
-import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
-import 'package:conferance_app/screens/bottombar/custom_bottom_bar.dart';
-import 'package:conferance_app/screens/events/event_details_screen.dart';
-import 'package:conferance_app/screens/intro/intro_screen.dart';
-import 'package:conferance_app/screens/splash/splash_screen.dart';
+
 import 'package:conferance_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -35,7 +30,7 @@ class MyApp extends StatelessWidget {
                 // home: ResetPasswordScreen(),
                 // home: ChangePasswordScreen()
                 // home: CustomBottomNavigationBar(),
-                home: SplashScreen(),
+                home: AddEventPracticeScreen(),
                 // home: EventDetailsScreen(),
               ));
         });
