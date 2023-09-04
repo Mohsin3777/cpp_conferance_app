@@ -131,22 +131,16 @@
 //   }
 // }
 
-
-
-
-
-
-
-
 class PracticeEventModel {
   String? message;
-  Data? data;
+  EventModelData? data;
 
   PracticeEventModel({this.message, this.data});
 
   PracticeEventModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new EventModelData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -159,8 +153,9 @@ class PracticeEventModel {
   }
 }
 
-class Data {
+class EventModelData {
   String? title;
+  String? titleImage;
   String? description;
   List<DateOfEvent>? dateOfEvent;
   List<DaySchedule>? daySchedule;
@@ -171,8 +166,9 @@ class Data {
   String? updatedAt;
   int? iV;
 
-  Data(
+  EventModelData(
       {this.title,
+      this.titleImage,
       this.description,
       this.dateOfEvent,
       this.daySchedule,
@@ -183,8 +179,9 @@ class Data {
       this.updatedAt,
       this.iV});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  EventModelData.fromJson(Map<String, dynamic> json) {
     title = json['title'];
+    titleImage = json['titleImage'];
     description = json['description'];
     if (json['dateOfEvent'] != null) {
       dateOfEvent = <DateOfEvent>[];
@@ -214,6 +211,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
+    data['titleImage'] = this.titleImage;
     data['description'] = this.description;
     if (this.dateOfEvent != null) {
       data['dateOfEvent'] = this.dateOfEvent!.map((v) => v.toJson()).toList();

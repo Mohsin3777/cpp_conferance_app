@@ -1,5 +1,7 @@
 import 'package:conferance_app/practice/add_event.dart';
 import 'package:conferance_app/providers/auth_provider.dart';
+import 'package:conferance_app/providers/event_provider.dart';
+import 'package:conferance_app/screens/events/create_event_screen/create_basic_event.dart';
 
 import 'package:conferance_app/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -23,16 +25,17 @@ class MyApp extends StatelessWidget {
           return MultiProvider(
               providers: [
                 ChangeNotifierProvider(create: (_) => AuthProvider()),
+                ChangeNotifierProvider(create: (_) => EventProvider()),
               ],
               child: MaterialApp(
-                title: 'Conferance App',
-                theme: MyTheme.lightTheme(),
-                // home: ResetPasswordScreen(),
-                // home: ChangePasswordScreen()
-                // home: CustomBottomNavigationBar(),
-                home: AddEventPracticeScreen(),
-                // home: EventDetailsScreen(),
-              ));
+                  title: 'Conferance App',
+                  theme: MyTheme.lightTheme(),
+                  // home: ResetPasswordScreen(),
+                  home: CreateBasicEvent()
+                  // home: CustomBottomNavigationBar(),
+                  // home: AddEventPracticeScreen(),
+                  // home: EventDetailsScreen(),
+                  ));
         });
   }
 }

@@ -1,6 +1,3 @@
-
-
-
 import 'package:conferance_app/practice/add_schedule.dart';
 import 'package:conferance_app/practice/practice_event_model.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +5,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uuid/uuid.dart';
-
 
 import '../services/http_services/event_services/event_services.dart';
 
@@ -20,17 +16,14 @@ class AddEventPracticeScreen extends StatefulWidget {
 }
 
 class _AddEventPracticeScreenState extends State<AddEventPracticeScreen> {
-
-
-
-var uuid = Uuid();
+  var uuid = Uuid();
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   List<DateOfEvent> listOfDays = [];
   int noOfdays = 1;
   List<DummyClass> daysSchedule = [
-    DummyClass(id: '11',description: 'first'),
-       DummyClass(id: '2',description: 'secomnd'),
+    DummyClass(id: '11', description: 'first'),
+    DummyClass(id: '2', description: 'secomnd'),
   ];
   Future<void> startDateFunction(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -39,40 +32,31 @@ var uuid = Uuid();
         firstDate: DateTime.now(),
         lastDate: DateTime(2101));
 
-
     if (picked != null && picked != startDate) {
-
-
-  // if (DateUtils.isSameDay(picked, endDate)){
-      if (picked.compareTo(endDate) == 0){
-  print('same day');
-     setState(() {
+      // if (DateUtils.isSameDay(picked, endDate)){
+      if (picked.compareTo(endDate) == 0) {
+        print('same day');
+        setState(() {
           startDate = picked;
         });
- 
-}else{
-      if (picked.compareTo(endDate) < 0) {
-        print("Start date  is before endDate");
+      } else {
+        if (picked.compareTo(endDate) < 0) {
+          print("Start date  is before endDate");
 
-        setState(() {
-          startDate =picked;
-        });
+          setState(() {
+            startDate = picked;
+          });
+        }
+
+        if (picked.compareTo(endDate) > 0) {
+          print("Start date  is after endDate");
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Start date  is after endDate')));
+          setState(() {
+            startDate = DateTime.now();
+          });
+        }
       }
-
-          if (picked.compareTo(endDate) > 0) {
-        print("Start date  is after endDate");
-ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Start date  is after endDate')));
-        setState(() {
-          startDate =DateTime.now();
-        });
-      }
-}
-
-
-    
-
-
- 
     }
   }
 
@@ -82,82 +66,67 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Start date  i
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: endDate,
-           firstDate: DateTime.now(),
+        firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     if (picked != null && picked != endDate) {
-      if (DateUtils.isSameDay(picked, startDate)){
-         setState(() {
-          endDate = picked;
-        });
-   print('same day');
-}else{
-  if (startDate.compareTo(endDate) < 0) {
-        print("DT1 is before DT2");
-
+      if (DateUtils.isSameDay(picked, startDate)) {
         setState(() {
           endDate = picked;
         });
+        print('same day');
+      } else {
+        if (startDate.compareTo(endDate) < 0) {
+          print("DT1 is before DT2");
 
-        Duration diff = endDate.difference(startDate);
-        // getDaysInBetween(startDate,endDate);
+          setState(() {
+            endDate = picked;
+          });
 
-        setState(() {
-          noOfdays = diff.inDays;
-          print(noOfdays);
-        });
+          Duration diff = endDate.difference(startDate);
+          // getDaysInBetween(startDate,endDate);
+
+          setState(() {
+            noOfdays = diff.inDays;
+            print(noOfdays);
+          });
+        }
+
+        if (startDate.compareTo(endDate) > 0) {
+          print("DT1 is after DT2");
+
+          setState(() {
+            endDate = DateTime.now();
+          });
+        }
       }
-
-      if (startDate.compareTo(endDate) > 0) {
-        print("DT1 is after DT2");
-
-        setState(() {
-          endDate = DateTime.now();
-        });
-      }
-}
-
-
-      
-
-  
     }
   }
 
+  List<DateTime> getDaysInBetween(DateTime startDate, DateTime endDate) {
+    List<DateTime> days = [];
 
-List<DateTime> getDaysInBetween(DateTime startDate, DateTime endDate) {
+    if (startDate.compareTo(endDate) == 0) {
+      listOfDays = [];
+      days.add(startDate);
 
-
-  List<DateTime> days = [];
-
-    if (startDate.compareTo(endDate) == 0){
-      listOfDays=[];
-days.add(startDate);
-
-listOfDays.add(DateOfEvent(date: days[0].toString().split(' ')[0],
-dateOfEventId: uuid.v1()
-));
-
-    }else{
-        for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
-    days.add(startDate.add(Duration(days: i)));
-  }
-listOfDays=[];
-  days.forEach((day) {
-    // print(day.toString().split(' ')[0]);
-listOfDays.add(DateOfEvent(date: day.toString().split(' ')[0],
-dateOfEventId: uuid.v1()
-));
-
-  });
+      listOfDays.add(DateOfEvent(
+          date: days[0].toString().split(' ')[0], dateOfEventId: uuid.v1()));
+    } else {
+      for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+        days.add(startDate.add(Duration(days: i)));
+      }
+      listOfDays = [];
+      days.forEach((day) {
+        // print(day.toString().split(' ')[0]);
+        listOfDays.add(DateOfEvent(
+            date: day.toString().split(' ')[0], dateOfEventId: uuid.v1()));
+      });
     }
 
+    // print(listOfDays[0]);
+    return days;
+  }
 
-
-
-
-  // print(listOfDays[0]);
-  return days;
-}
   TextEditingController idController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
@@ -232,16 +201,19 @@ dateOfEventId: uuid.v1()
         width: 1.sw,
         child: Column(
           children: [
-            Text(startDate.toString(),
-            style: TextStyle(fontSize: 26.sp,color: Colors.red),
-            
+            Text(
+              startDate.toString(),
+              style: TextStyle(fontSize: 26.sp, color: Colors.red),
             ),
             ElevatedButton(
                 onPressed: () {
                   startDateFunction(context);
                 },
                 child: Text('startDate')),
-            Text(endDate.toString(),         style: TextStyle(fontSize: 26.sp,color: Colors.purple),),
+            Text(
+              endDate.toString(),
+              style: TextStyle(fontSize: 26.sp, color: Colors.purple),
+            ),
             ElevatedButton(
                 onPressed: () {
                   endDateFunction(context);
@@ -252,31 +224,29 @@ dateOfEventId: uuid.v1()
                   // final d1 = DateTime.now();
                   // final d2 = d1.add(Duration(days: 2));
                   // print(d2);
-      if (startDate.compareTo(endDate) > 0){
+                  if (startDate.compareTo(endDate) > 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Start date must before end date')));
+                  } else {
+                    List<DaySchedule> dataList = [];
+                    getDaysInBetween(startDate, endDate);
+                    listOfDays.forEach((element) {
+                      dataList.add(
+                          //   {
+                          //   'date':element.date,
+                          //     'dateOfEventId':element.dateOfEventId,
+                          //   'schedule':[]
+                          // }
+                          DaySchedule(
+                              date: element.date,
+                              dateOfEventId: element.dateOfEventId,
+                              schedule: []));
+                    });
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-          'Start date must before end date'
-        )));
-      }else{
-                   List<DaySchedule> dataList =[];
-getDaysInBetween(startDate,endDate);
-                   listOfDays.forEach((element) { 
-                    dataList.add(
-                    //   {
-                    //   'date':element.date,
-                    //     'dateOfEventId':element.dateOfEventId,
-                    //   'schedule':[]
-                    // }
-                    DaySchedule(date: element.date,dateOfEventId: element.dateOfEventId,schedule: [])
+                    print(dataList);
 
-
-                    );
-                   });
-
-                   print(dataList);
-
-                  await EventServices.addEvent(schedulList:   dataList,listOfdays:  listOfDays);
-                }
+                    // await EventServices.addEvent(schedulList:   dataList,listOfdays:  listOfDays);
+                  }
                 },
                 child: Text('POST A EVENT')),
             ElevatedButton(
@@ -284,9 +254,12 @@ getDaysInBetween(startDate,endDate);
                   _displayDialog(context);
                 },
                 child: Text('add day schedule')),
-                    ElevatedButton(
+            ElevatedButton(
                 onPressed: () {
-     Navigator.push(context, MaterialPageRoute(builder: (context)=>AddScheduleScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddScheduleScreen()));
                 },
                 child: Text('Schedule Screen')),
             Expanded(
