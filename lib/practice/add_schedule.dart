@@ -1,9 +1,11 @@
 import 'package:conferance_app/practice/dialog.dart';
 import 'package:conferance_app/practice/practice_event_model.dart';
+import 'package:conferance_app/providers/event_provider.dart';
 import 'package:conferance_app/services/http_services/event_services/event_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class AddScheduleScreen extends StatefulWidget {
   const AddScheduleScreen({super.key});
@@ -30,7 +32,8 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
   }
 
   getData() async {
-    practiceEventModel = await EventServices.getSingleEventWithId();
+    practiceEventModel =
+        await EventServices.getSingleEventWithId(id: '', context: context);
 
     daysScheduleList = practiceEventModel!.data!.daySchedule!;
 
@@ -85,6 +88,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<EventProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Schedule'),
@@ -94,7 +98,8 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             PracticeEventModel.fromJson(practiceEventModel!.toJson());
         Future.delayed(Duration(seconds: 1), () {
           EventServices.addScheduleInEvent(
-              practiceEventModel1.data!.daySchedule);
+              daySchedule: practiceEventModel1.data!.daySchedule,
+              id: prov.createdEventId!);
         });
       }),
       body: Container(

@@ -154,19 +154,19 @@ class EventServices {
   }
   //update event
 
-  static Future addScheduleInEvent(List<DaySchedule>? daySchedule) async {
+  static Future addScheduleInEvent(
+      {List<DaySchedule>? daySchedule, required String id}) async {
     try {
-      http.Response response = await put(
-          "api/event/addScheduleInEvent/64f5b4805b6aa1043b75b64f",
+      http.Response response = await put("api/event/addScheduleInEvent/$id",
           json.encode({"daySchedule": daySchedule}));
-
+      print(response.statusCode);
       switch (response.statusCode) {
         case 200:
           var data = await jsonDecode(response.body);
           PracticeEventModel practiceEventModel =
               PracticeEventModel.fromJson(data);
 
-          print(daySchedule);
+          print(response.body);
           print(daySchedule);
           // storeUserTokenInSharedPref(data['accessToken']);
 
@@ -188,10 +188,11 @@ class EventServices {
   }
 
   // getSingleEvent with id
-  static Future getSingleEventWithId() async {
+  static Future getSingleEventWithId(
+      {String? id, required BuildContext context}) async {
     try {
       http.Response response = await get(
-        "api/event/getSingleEventWithId/64f5b4805b6aa1043b75b64f",
+        "api/event/getSingleEventWithId/$id",
       );
       // print(response.body);
       switch (response.statusCode) {
@@ -209,12 +210,16 @@ class EventServices {
           throw Exception(response.reasonPhrase);
       }
     } on SocketException {
+      CustomSnackBar.buildErrorSnackbar(context, 'NO Internet');
       throw NoInternetException('No Internet');
     } on HttpException {
+      CustomSnackBar.buildErrorSnackbar(context, 'No Service Found');
       throw NoServiceFoundException('No Service Found');
     } on FormatException {
+      CustomSnackBar.buildErrorSnackbar(context, 'Invalid Data Format');
       throw InvalidFormatException('Invalid Data Format');
     } catch (e) {
+      CustomSnackBar.buildErrorSnackbar(context, e.toString());
       throw UnknownException(e.toString());
     }
   }
