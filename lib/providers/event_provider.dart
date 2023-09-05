@@ -14,6 +14,7 @@ class EventProvider extends ChangeNotifier {
   List<DateOfEvent> listOfDays = []; //calcaute dates
   List<DaySchedule> daysSchedule = []; // final list of date schedule with id
   var uuid = Uuid(); //for create unique id
+  String? createdEventId;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -108,7 +109,7 @@ class EventProvider extends ChangeNotifier {
       listOfDays.add(DateOfEvent(
           date: days[0].toString().split(' ')[0], dateOfEventId: uuid.v1()));
 
-      setDatesWithUniqueId();
+      _setDatesWithUniqueId();
     } else {
       for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
         days.add(startDate.add(Duration(days: i)));
@@ -120,14 +121,22 @@ class EventProvider extends ChangeNotifier {
             date: day.toString().split(' ')[0], dateOfEventId: uuid.v1()));
       });
 
-      setDatesWithUniqueId();
+      _setDatesWithUniqueId();
     }
 
     print(listOfDays.length);
   }
 
-  //set dates with id
   setDatesWithUniqueId() {
+    _isLoading = true;
+    _setDatesWithUniqueId();
+    // _isLoading = false;
+    notifyListeners();
+  }
+
+  //set dates with id
+
+  _setDatesWithUniqueId() {
     daysSchedule = [];
     listOfDays.forEach((element) {
       daysSchedule.add(
@@ -144,17 +153,24 @@ class EventProvider extends ChangeNotifier {
       print(daysSchedule[0].dateOfEventId);
     });
 
-    notifyListeners();
+    // notifyListeners();
   }
 
-  uploadDataToServer(EventModelData? eventModelData, File image) {
+  uploadDataToServer(
+      {EventModelData? eventModelData,
+      String? image,
+      BuildContext? context}) async {
     isLoading = true;
-    _uploadEventToServer(eventModelData, image);
+    await _uploadEventToServer(
+        eventModelData: eventModelData, image: image, context: context);
     isLoading = false;
     notifyListeners();
   }
 
-  _uploadEventToServer(EventModelData? eventModelData, File? image) async {
+  _uploadEventToServer(
+      {EventModelData? eventModelData,
+      String? image,
+      BuildContext? context}) async {
     // var bytes = await rootBundle.load(image!.path);
     // var buffer = bytes.buffer;
     // var imageBytes =
@@ -163,6 +179,9 @@ class EventProvider extends ChangeNotifier {
     // // Encode the bytes
     // var base64Image = base64Encode(imageBytes);
 
-    await EventServices.addEvent(eventModelData, image!.path);
+    createdEventId = await EventServices.addEvent(
+        eventModelData: eventModelData, filePath: image!, context: context!);
+
+    print(createdEventId.toString() + 'ID SUCCESS');
   }
 }

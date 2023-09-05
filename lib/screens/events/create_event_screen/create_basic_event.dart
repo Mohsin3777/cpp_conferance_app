@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:conferance_app/providers/event_provider.dart';
+import 'package:conferance_app/screens/events/create_event_screen/add_days_scheduleInEvent.dart';
 import 'package:conferance_app/services/http_services/event_services/event_services.dart';
 import 'package:conferance_app/utils/text_field_decoration.dart';
 import 'package:flutter/material.dart';
@@ -187,9 +188,34 @@ class _CreateBasicEventState extends State<CreateBasicEvent> {
                                 description: descriptionController.text.trim(),
                                 daySchedule: eventPrvInstance.daysSchedule);
 
-                            print(eventModelData.address.toString());
-                            await eventPrvInstance.uploadDataToServer(
-                                eventModelData, _pickedImage!);
+                            if (_pickedImage != null) {
+                              print(eventModelData.address.toString());
+                              await eventPrvInstance.uploadDataToServer(
+                                  eventModelData: eventModelData,
+                                  image: _pickedImage!.path,
+                                  context: context);
+
+                              // EventServices.UploadIMage(
+                              //     eventModelData, _pickedImage!.path);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddDaysScheduleInEventsScreen()));
+                            } else {
+                              await eventPrvInstance.uploadDataToServer(
+                                  eventModelData: eventModelData,
+                                  image: '',
+                                  context: context);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddDaysScheduleInEventsScreen()));
+                              SnackBar(content: Text('PICK IMAGE'));
+                            }
                           }
                         }
                       }

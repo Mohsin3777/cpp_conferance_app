@@ -4,16 +4,20 @@ import 'dart:io';
 import 'package:conferance_app/practice/practice_event_model.dart';
 import 'package:conferance_app/services/http_services/api_response_helper_class.dart';
 import 'package:conferance_app/services/http_services/http_services.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../constants/app_constant.dart';
+import '../../../utils/custom_snackbar.dart';
+import '../../../widgets/custom_snackbar.dart';
+import '../../../widgets/custom_snackbar.dart';
 
 class EventServices {
-  static Future addEvent1(
+  static Future addEvent(
       // {required List<dynamic> schedulList, required List listOfdays}
-
+      {BuildContext? context,
       EventModelData? eventModelData,
-      String filePath) async {
+      String? filePath}) async {
     try {
       http.Response response = await post("api/event/createEvent", json.encode(
           //   {
@@ -24,70 +28,106 @@ class EventServices {
           // },
 
           eventModelData!.toJson()));
-      print(response.body);
+
       switch (response.statusCode) {
         case 200:
           var data = await jsonDecode(response.body);
-          // storeUserTokenInSharedPref(data['accessToken']);
+          print(data['data']['_id']);
 
-          // UserModel? rNetUser = await getUserData();
-          // return rNetUser;
-          return 200;
+          // UploadIMage(
+          //     context: context!,
+          //     filePath: filePath.toString(),
+          //     docId: '',
+          //     eventModelData: eventModelData);
+          if (filePath!.isNotEmpty && filePath != '') {
+            var uploadImgStatus = await UploadIMage(
+                context: context!,
+                filePath: filePath.toString(),
+                docId: data['data']['_id'],
+                eventModelData: eventModelData);
+
+            return uploadImgStatus;
+          } else {
+            return data['data']['_id'];
+          }
+        // storeUserTokenInSharedPref(data['accessToken']);
+
+        // UserModel? rNetUser = await getUserData();
+        // return rNetUser;
+        // CustomSnackBar.buildSuccessSnackbar(context, 'Success');
+
         default:
           throw Exception(response.reasonPhrase);
       }
     } on SocketException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'NO Internet');
       throw NoInternetException('No Internet');
     } on HttpException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'No Service Found');
       throw NoServiceFoundException('No Service Found');
     } on FormatException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'Invalid Data Format');
+
       throw InvalidFormatException('Invalid Data Format');
     } catch (e) {
+      CustomSnackBar.buildErrorSnackbar(context!, e.toString());
+
       throw UnknownException(e.toString());
     }
   }
 
 //new func
-  static Future addEvent(
+  static Future UploadIMage(
       // {required List<dynamic> schedulList, required List listOfdays}
-
+      {required BuildContext context,
+      required String docId,
       EventModelData? eventModelData,
-      String filePath) async {
+      required String filePath}) async {
     try {
-      String addimageUrl = AppConstants.baseUrl + 'api/event/createEvent';
+      String addimageUrl =
+          AppConstants.baseUrl + 'api/event/uploadTitleImageInEvent/$docId';
 
       Map<String, String> headers = {
         'Content-Type': 'multipart/form-data',
         // 'charset': 'utf-8'
       };
 
-      var request = http.MultipartRequest('POST', Uri.parse(addimageUrl))
+      var request = http.MultipartRequest('PUT', Uri.parse(addimageUrl))
         ..headers.addAll(headers)
         // ..fields.addAll(json.encode(eventModelData!.toJson()))
         ..files.add(await http.MultipartFile.fromPath('image', filePath));
-
+      // request.fields = json.encode(eventModelData!.toJson());
+      request.fields['data'] = json.encode(eventModelData!.toJson());
       var streamResponse = await request.send();
 
       var response = await http.Response.fromStream(streamResponse);
       print(response.body);
+      print(response.statusCode);
       switch (response.statusCode) {
         case 200:
           var data = await jsonDecode(response.body);
+
+          CustomSnackBar.buildSuccessSnackbar(
+              context, 'Successfully upload image');
           // storeUserTokenInSharedPref(data['accessToken']);
 
           // UserModel? rNetUser = await getUserData();
           // return rNetUser;
-          return 200;
+          return data['data']['_id'];
         default:
           throw Exception(response.reasonPhrase);
       }
     } on SocketException {
+      CustomSnackBar.buildErrorSnackbar(context, 'NO Internet');
       throw NoInternetException('No Internet');
     } on HttpException {
+      CustomSnackBar.buildErrorSnackbar(context, 'No Service Found');
       throw NoServiceFoundException('No Service Found');
     } on FormatException {
+      CustomSnackBar.buildErrorSnackbar(context, 'Invalid Data Format');
       throw InvalidFormatException('Invalid Data Format');
     } catch (e) {
+      CustomSnackBar.buildErrorSnackbar(context, e.toString());
       throw UnknownException(e.toString() + 'aaaaaaaaaaaaaaaaaaa');
     }
   }
