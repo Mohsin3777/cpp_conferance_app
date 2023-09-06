@@ -181,7 +181,7 @@ class EventModelData {
 
   EventModelData.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    titleImage = json['titleImage'];
+    titleImage = json['eventTitleImage'];
     description = json['description'];
     if (json['dateOfEvent'] != null) {
       dateOfEvent = <DateOfEvent>[];
@@ -211,7 +211,7 @@ class EventModelData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
-    data['titleImage'] = this.titleImage;
+    data['eventTitleImage'] = this.titleImage;
     data['description'] = this.description;
     if (this.dateOfEvent != null) {
       data['dateOfEvent'] = this.dateOfEvent!.map((v) => v.toJson()).toList();

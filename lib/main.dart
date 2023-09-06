@@ -29,15 +29,15 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider(create: (_) => EventProvider()),
               ],
               child: MaterialApp(
-                title: 'Conferance App',
-                theme: MyTheme.lightTheme(),
-                // home: ResetPasswordScreen(),
-                // home: CreateBasicEvent()
-                home: ShowEvent(),
-                // home: CustomBottomNavigationBar(),
-                // home: AddEventPracticeScreen(),
-                // home: EventDetailsScreen(),
-              ));
+                  title: 'Conferance App',
+                  theme: MyTheme.lightTheme(),
+                  // home: ResetPasswordScreen(),
+                  home: CreateBasicEvent()
+                  // home: ShowEvent(),
+                  // home: CustomBottomNavigationBar(),
+                  // home: AddEventPracticeScreen(),
+                  // home: EventDetailsScreen(),
+                  ));
         });
   }
 }
