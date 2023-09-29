@@ -58,7 +58,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           selectedItemColor: AppConstants.CONSTANT_COLOR,
           unselectedItemColor: Colors.black,
           onTap: (index) {
-            _incrementTab(index);
+            Future.delayed(Duration(seconds: 1), () {
+              _incrementTab(index);
+            });
           },
           items: [
             BottomNavigationBarItem(

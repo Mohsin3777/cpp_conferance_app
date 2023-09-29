@@ -10,11 +10,15 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
 class LoginScreen extends StatelessWidget {
   var spaceBtweenWidget = SizedBox(height: 20.h);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: Container(
           height: 1.sh,
           width: 1.sw,
@@ -41,22 +45,27 @@ class LoginScreen extends StatelessWidget {
                         topRight: Radius.circular(33.r)),
                     color: AppConstants.CONSTANT_COLOR,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SingleChildScrollView(child: LoginForm()),
-                      Spacer(),
-                      _customBottomText(
-                        normalText: 'Doesn’t have an account? ',
-                        highlightedText: 'Register Here',
-                        onpress: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
-                        },
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        LoginForm(),
+                        // Spacer(),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        _customBottomText(
+                          normalText: 'Doesn’t have an account? ',
+                          highlightedText: 'Register Here',
+                          onpress: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpScreen()));
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )
