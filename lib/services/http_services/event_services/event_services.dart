@@ -13,12 +13,14 @@ import '../../../widgets/custom_snackbar.dart';
 import '../../../widgets/custom_snackbar.dart';
 
 class EventServices {
-  static Future addEvent111(
+  static Future addEvent(
       // {required List<dynamic> schedulList, required List listOfdays}
       {BuildContext? context,
       EventModelData? eventModelData,
       String? filePath}) async {
     try {
+
+     
       http.Response response = await post("api/event/createEvent", json.encode(
           //   {
           //   "title": "FIsrt",
@@ -77,7 +79,7 @@ class EventServices {
 
 
 
-static Future addEvent(
+static Future addEvent1(
       // {required List<dynamic> schedulList, required List listOfdays}
       {BuildContext? context,
       EventModelData? eventModelData,
@@ -87,12 +89,33 @@ static Future addEvent(
     var headers = {
   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVjOTUyZTY4YzY2NTU1ZTcwZjFmNTgiLCJlbWFpbCI6Im1vaHNpbkBqamoxLmNvbSIsImlhdCI6MTY5MzIzMDM4OSwiZXhwIjoxNjkzNDg5NTg5fQ.Cv1OXxKCc2qZ4xtQxNOpEjdpea4d66zBE4tn0twGAsM',
           'Content-Type': 'multipart/form-data',
+          
 };
 var request = http.MultipartRequest('POST', Uri.parse('http://192.168.18.67:8000/api/event/createEvent'));
-request.fields.addAll({
-  'title': '+FIsrtaaaaa+++a',
-  'description': 'adda'
-});
+// request.fields.addAll({
+//   'title': '+FIsrtaaaaa+++a',
+//   'description': 'adda'
+// });
+Map<String, String> obj = {"data": json.encode(eventModelData).toString()};
+ print(obj);
+request.fields['title']=eventModelData!.title.toString();
+request.fields['title']=eventModelData.description.toString();
+
+   for (int i = 0; i < eventModelData.daySchedule!.length; i++) {
+dynamic fieldMap =  eventModelData.daySchedule![i];
+      fieldMap.forEach((key, value) {
+        request.fields['daySchedule[$i][$key]'] = value;
+      });
+    }
+
+    
+   for (int i = 0; i < eventModelData.dateOfEvent!.length; i++) {
+dynamic fieldMap =  eventModelData.dateOfEvent![i];
+      fieldMap.forEach((key, value) {
+        request.fields['dateOfEvent[$i][$key]'] = value;
+      });
+    }
+
 request.files.add(await http.MultipartFile.fromPath('image', filePath.toString()));
 request.headers.addAll(headers);
 
@@ -106,7 +129,7 @@ print(response.statusCode.toString() +'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
  
                   var d = await http.Response.fromStream(response);
                  var data = await jsonDecode(d.body);
-            print(data['data']['_id']);
+            print(data['data']);
          return data['data']['_id'];
          
         // storeUserTokenInSharedPref(data['accessToken']);

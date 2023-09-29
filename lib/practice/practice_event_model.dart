@@ -277,6 +277,8 @@ class DaySchedule {
     }
     return data;
   }
+
+  void forEach(Null Function(dynamic key, dynamic value) param0) {}
 }
 
 class Schedule {
