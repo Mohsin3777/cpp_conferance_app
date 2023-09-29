@@ -13,7 +13,7 @@ import '../../../widgets/custom_snackbar.dart';
 import '../../../widgets/custom_snackbar.dart';
 
 class EventServices {
-  static Future addEvent(
+  static Future addEvent111(
       // {required List<dynamic> schedulList, required List listOfdays}
       {BuildContext? context,
       EventModelData? eventModelData,
@@ -34,13 +34,10 @@ class EventServices {
           var data = await jsonDecode(response.body);
           print(data['data']['_id']);
 
-          // UploadIMage(
-          //     context: context!,
-          //     filePath: filePath.toString(),
-          //     docId: '',
-          //     eventModelData: eventModelData);
           if (filePath!.isNotEmpty && filePath != '') {
-            var uploadImgStatus = await UploadIMage(
+            var uploadImgStatus =
+            
+             await UploadIMage(
                 context: context!,
                 filePath: filePath.toString(),
                 docId: data['data']['_id'],
@@ -75,6 +72,81 @@ class EventServices {
       throw UnknownException(e.toString());
     }
   }
+
+
+
+
+
+static Future addEvent(
+      // {required List<dynamic> schedulList, required List listOfdays}
+      {BuildContext? context,
+      EventModelData? eventModelData,
+      String? filePath}) async {
+    try {
+     
+    var headers = {
+  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVjOTUyZTY4YzY2NTU1ZTcwZjFmNTgiLCJlbWFpbCI6Im1vaHNpbkBqamoxLmNvbSIsImlhdCI6MTY5MzIzMDM4OSwiZXhwIjoxNjkzNDg5NTg5fQ.Cv1OXxKCc2qZ4xtQxNOpEjdpea4d66zBE4tn0twGAsM',
+          'Content-Type': 'multipart/form-data',
+};
+var request = http.MultipartRequest('POST', Uri.parse('http://192.168.18.67:8000/api/event/createEvent'));
+request.fields.addAll({
+  'title': '+FIsrtaaaaa+++a',
+  'description': 'adda'
+});
+request.files.add(await http.MultipartFile.fromPath('image', filePath.toString()));
+request.headers.addAll(headers);
+
+http.StreamedResponse response = await request.send();
+print(response.statusCode.toString() +'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+      switch (response.statusCode) {
+        case 200:
+          // var data = await jsonDecode(response.body);
+          // print(data['data']['_id']);
+
+ 
+                  var d = await http.Response.fromStream(response);
+                 var data = await jsonDecode(d.body);
+            print(data['data']['_id']);
+         return data['data']['_id'];
+         
+        // storeUserTokenInSharedPref(data['accessToken']);
+
+        // UserModel? rNetUser = await getUserData();
+        // return rNetUser;
+        // CustomSnackBar.buildSuccessSnackbar(context, 'Success');
+
+        default:
+          throw Exception(response.reasonPhrase);
+      }
+    } on SocketException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'NO Internet');
+      throw NoInternetException('No Internet');
+    } on HttpException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'No Service Found');
+      throw NoServiceFoundException('No Service Found');
+    } on FormatException {
+      CustomSnackBar.buildErrorSnackbar(context!, 'Invalid Data Format');
+
+      throw InvalidFormatException('Invalid Data Format');
+    } catch (e) {
+      CustomSnackBar.buildErrorSnackbar(context!, e.toString());
+
+      throw UnknownException(e.toString());
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //new func
   static Future UploadIMage(
@@ -115,6 +187,7 @@ class EventServices {
           // return rNetUser;
           return data['data']['_id'];
         default:
+        
           throw Exception(response.reasonPhrase);
       }
     } on SocketException {

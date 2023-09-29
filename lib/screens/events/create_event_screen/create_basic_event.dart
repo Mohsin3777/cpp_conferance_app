@@ -72,7 +72,9 @@ class _CreateBasicEventState extends State<CreateBasicEvent> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Create Event"),
+       
       ),
+      
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
         height: 1.sh,
@@ -198,7 +200,7 @@ class _CreateBasicEventState extends State<CreateBasicEvent> {
                               // EventServices.UploadIMage(
                               //     eventModelData, _pickedImage!.path);
 
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
@@ -209,7 +211,7 @@ class _CreateBasicEventState extends State<CreateBasicEvent> {
                                   image: '',
                                   context: context);
 
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>

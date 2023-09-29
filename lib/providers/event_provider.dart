@@ -130,7 +130,7 @@ class EventProvider extends ChangeNotifier {
   setDatesWithUniqueId() {
     _isLoading = true;
     _setDatesWithUniqueId();
-    // _isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 
