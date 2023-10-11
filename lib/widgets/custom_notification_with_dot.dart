@@ -2,7 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 class NotificationIconWithDot extends StatelessWidget {
-  Color? iconColor;
+  final Color? iconColor;
   NotificationIconWithDot({
     this.iconColor,
     Key? key,

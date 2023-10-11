@@ -121,7 +121,10 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                 )
               ],
-            ),
+            ),ElevatedButton(onPressed: ()async{
+               AuthServices _authServices = AuthServices();
+            await   _authServices.getUserData(context: context);
+            }, child: Text('aa')),
             //forget password row end
             spaceBtweenWidget,
             CustomLoadingButton(

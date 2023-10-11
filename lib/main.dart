@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conferance_app/practice/event_pract.dart';
 import 'package:conferance_app/providers/auth_provider.dart';
 import 'package:conferance_app/screens/auth/resetpassword/change_password.dart';
@@ -8,12 +10,19 @@ import 'package:conferance_app/screens/intro/intro_screen.dart';
 import 'package:conferance_app/screens/splash/splash_screen.dart';
 import 'package:conferance_app/screens/time_line_calender.dart';
 import 'package:conferance_app/theme/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
+void _enablePlatformOverrideForDesktop() {
+  if (!kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
+    debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  }
+}
 
 void main() {
+   WidgetsFlutterBinding.ensureInitialized();
+  _enablePlatformOverrideForDesktop();
   runApp(const MyApp());
 }
 
@@ -38,7 +47,7 @@ class MyApp extends StatelessWidget {
                 // home: ResetPasswordScreen(),
                 // home: ChangePasswordScreen()
                 // home: CustomBottomNavigationBar(),
-                home: EventAdd(),
+                home: SplashScreen(),
                 // home: EventDetailsScreen(),
               ));
         });

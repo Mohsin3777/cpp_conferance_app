@@ -9,10 +9,11 @@ Future<http.Response> get(String endPoint) {
   String url = AppConstants.baseUrl + endPoint;
 
   Uri uri = Uri.parse(url);
-  return http.get(uri);
+  return http.get(uri ,  headers: {'Content-Type': 'application/json',
+ 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI2OWExM2VlNDA2MTMzZTdhMWExZWYiLCJlbWFpbCI6Im1vaEBnLmNvbSIsImlhdCI6MTY5NzAzMjEwNiwiZXhwIjoxNjk3MjkxMzA2fQ.kBhyxMWgr12Q7442xo20yd-hEblNj3mERWeipTqLUtw'});
 }
 
-// Http Post request
+// Http Post request withotut Token
 Future<http.Response> post(String endPoint, body) {
   String url = AppConstants.baseUrl + endPoint;
 
@@ -20,6 +21,10 @@ Future<http.Response> post(String endPoint, body) {
   return http.post(uri,
       headers: {'Content-Type': 'application/json'}, body: body);
 }
+
+
+
+
 
 Future<http.Response> put(String endPoint, body) {
   String url = AppConstants.baseUrl + endPoint;
@@ -38,6 +43,7 @@ Future<http.Response> postWithToken(String endPoint) async {
   Uri uri = Uri.parse(url);
   return http.post(uri, headers: {
     // 'Authorization': 'Bearer $token',
+     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI2OWExM2VlNDA2MTMzZTdhMWExZWYiLCJlbWFpbCI6Im1vaEBnLmNvbSIsImlhdCI6MTY5NzAzMjEwNiwiZXhwIjoxNjk3MjkxMzA2fQ.kBhyxMWgr12Q7442xo20yd-hEblNj3mERWeipTqLUtw'
   });
 }
 
@@ -51,7 +57,8 @@ Future<http.Response> postWithTokenBody(String endPoint, body) async {
   return http.post(uri,
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer $token'
+        // 'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI2OWExM2VlNDA2MTMzZTdhMWExZWYiLCJlbWFpbCI6Im1vaEBnLmNvbSIsImlhdCI6MTY5NzAzMjEwNiwiZXhwIjoxNjk3MjkxMzA2fQ.kBhyxMWgr12Q7442xo20yd-hEblNj3mERWeipTqLUtw'
       },
       body: body);
 }
@@ -114,7 +121,8 @@ Future<http.Response> putWithToken(String endPoint, body, String token) {
   return http.put(uri,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+        // 'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI2OWExM2VlNDA2MTMzZTdhMWExZWYiLCJlbWFpbCI6Im1vaEBnLmNvbSIsImlhdCI6MTY5NzAzMjEwNiwiZXhwIjoxNjk3MjkxMzA2fQ.kBhyxMWgr12Q7442xo20yd-hEblNj3mERWeipTqLUtw'
       },
       body: body);
 }

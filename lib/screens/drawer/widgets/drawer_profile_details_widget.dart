@@ -1,5 +1,7 @@
+import 'package:conferance_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/app_constant.dart';
 
@@ -10,7 +12,7 @@ class DrawerProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
+    return  Consumer<AuthProvider>(builder: (context, value, child) {return FittedBox(
       child: Row(
         children: [
           Column(
@@ -35,19 +37,15 @@ class DrawerProfileWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FittedBox(
-                child: Text(
-                  'John Doe',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff222222)),
-                ),
-              ),
+                child:   
+   Text(value.userModel.name.toString())
+   ),
+             
               SizedBox(
                 height: 6.h,
               ),
               Text(
-                'mamafoagajgoa@ggg.com',
+                value.userModel.email.toString(),
                 style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
@@ -84,9 +82,10 @@ class DrawerProfileWidget extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
         ],
-      ),
-    );
+      ));
+    });
+
   }
 }
