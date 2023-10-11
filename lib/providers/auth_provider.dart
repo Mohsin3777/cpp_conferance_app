@@ -14,6 +14,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
 
+  updateUserModel(String name){
+userModel.name =name;
+notifyListeners();
+  }
+
+
 loadUserData(BuildContext context)async{
   _isLoading=true;
  await _loadUserData(context);
@@ -26,15 +32,15 @@ loadUserData(BuildContext context)async{
      userModel =       await   _authServices.getUserData(context: context);
   }
 
-  updateUser(BuildContext context,UserModel? userModel)async{
+  updateUser(BuildContext context,UserModel? userModel ,String? image)async{
   _isLoading=true;
- await _updateUser(context,userModel);
+ await _updateUser(context,userModel,image!);
   _isLoading=false;
   notifyListeners();
 }
 
-  _updateUser(BuildContext context ,UserModel? userModel)async{
+  _updateUser(BuildContext context ,UserModel? userModel,String? image)async{
     AuthServices _authServices = AuthServices();
-     userModel =       await   _authServices.updateUser(context: context,userModel: userModel);
+     userModel =       await   _authServices.updateUser(context: context,userModel: userModel,image: image!);
   }
 }

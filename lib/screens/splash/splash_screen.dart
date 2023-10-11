@@ -24,9 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     nextScreen() async {
     await LocalStorageRepository().getToken().then((token) async {
       if (token == "" || token == null) {
-        // await Future.delayed(const Duration(seconds: 2)).then((value) =>
-        //     Navigator.pushReplacement(context,
-        //         MaterialPageRoute(builder: (context) => const IntroScreen())));
+        await Future.delayed(const Duration(seconds: 2)).then((value) =>
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const IntroScreen())));
         loadData();
       } else {
     loadData();

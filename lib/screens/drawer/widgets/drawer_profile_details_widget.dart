@@ -22,7 +22,7 @@ class DrawerProfileWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.r),
                     image: DecorationImage(
                       image: NetworkImage(
-                          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
+                value.userModel.profilePic ??          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'),
                       fit: BoxFit.fill,
                     )),
                 width: 100.w,

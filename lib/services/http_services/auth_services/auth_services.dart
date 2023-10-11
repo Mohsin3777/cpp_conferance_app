@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:conferance_app/constants/app_constant.dart';
 import 'package:conferance_app/model/user_model.dart';
 import 'package:conferance_app/services/http_services/api_response_helper_class.dart';
 import 'package:conferance_app/utils/custom_snackbar_class.dart';
@@ -16,7 +17,7 @@ import '../http_services.dart';
 
 class AuthServices {
 
-
+        LocalStorageRepository localStorageRepository= LocalStorageRepository();
   // Sign IN
   Future signIn({required String email, required String password}) async {
     try {
@@ -27,9 +28,13 @@ class AuthServices {
       print(response.body);
       switch (response.statusCode) {
         case 200:
-        LocalStorageRepository localStorageRepository= LocalStorageRepository();
+
           var data = await jsonDecode(response.body);
-          localStorageRepository.setToken(data['token']);
+               
+       await   localStorageRepository.setToken(data['token']);
+
+
+
           // UserModel? rNetUser = await getUserData();
           // return rNetUser;
           return 200;
@@ -90,20 +95,56 @@ Future getUserData({required BuildContext context}) async {
 
 
 
-  Future updateUser({required BuildContext context,UserModel? userModel}) async {
+  Future updateUser({required BuildContext context,UserModel? userModel, String? image}) async {
     try {
-      http.Response response = await putWithToken(
-          "api/user/userInfo",
-          {jsonEncode(userModel!.toJson())},
-          ''
+
+      LocalStorageRepository localStorageRepository = LocalStorageRepository();
+   var token = await   localStorageRepository.getToken();
+
+
+   print(token);
+var fianlResponse;
+   if(image !=''){
+  String url =
+          AppConstants.baseUrl + 'api/user/updateUser';
+
+      Map<String, String> headers = {
+        'Content-Type': 'multipart/form-data',
+        // 'charset': 'utf-8'
+        'Authorization': 'Bearer $token'
+      };
+
+      var request = http.MultipartRequest('PUT', Uri.parse(url))
+        ..headers.addAll(headers)
+        // ..fields.addAll(json.encode(eventModelData!.toJson()))
+        ..files.add(await http.MultipartFile.fromPath('image', image!));
+      // request.fields = json.encode(eventModelData!.toJson());
+      request.fields['name'] = userModel!.name!;
+      var streamResponse = await request.send();
+
+      var response = await http.Response.fromStream(streamResponse);
+
+
+fianlResponse=response;
+   }else{
+     http.Response response = await putWithToken(
+          "api/user/updateUser",
+          // jsonEncode({
+          //   "name":userModel!.name
+          // }),
+          jsonEncode(userModel!.toJson()),
+          token!
           
           
           );
       print(response.body);
-      switch (response.statusCode) {
+      fianlResponse =response;
+   }
+     
+      switch (fianlResponse.statusCode) {
         case 200:
         LocalStorageRepository localStorageRepository= LocalStorageRepository();
-          var data = await jsonDecode(response.body);
+          var data = await jsonDecode(fianlResponse.body);
 
           print(data);
           localStorageRepository.getToken();
@@ -115,9 +156,9 @@ Future getUserData({required BuildContext context}) async {
           return userModel;
         default:
      
-      CustomSnackBar.buildErrorSnackbar(context, response.reasonPhrase.toString());
+      CustomSnackBar.buildErrorSnackbar(context, fianlResponse.reasonPhrase.toString());
 
-          throw Exception(response.reasonPhrase);
+          throw Exception(fianlResponse.reasonPhrase);
       }
     } on SocketException {
       CustomSnackBar.buildErrorSnackbar(context, 'No Internet');

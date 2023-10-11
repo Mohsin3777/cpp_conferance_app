@@ -149,18 +149,21 @@ class _LoginFormState extends State<LoginForm> {
                     int status = await _authServices.signIn(
                         email: emailController.text.trim(),
                         password: passwordController.text.trim());
-
+                 print(status.toString() +'+++++++++++');
                     if (status == 200) {
-                      setState(() {
-                        isLoading = false;
-                        isLogin = false;
-                      });
 
-                      Navigator.pushReplacement(
+     
+                      // setState(() {
+                      //   isLoading = false;
+                      //   isLogin = false;
+                        
+                      // });
+      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   const CustomBottomNavigationBar()));
+                
                     } else {
                       setState(() {
                         isLoading = false;

@@ -1,5 +1,4 @@
 import 'package:conferance_app/constants/app_constant.dart';
-import 'package:conferance_app/providers/auth_provider.dart';
 import 'package:conferance_app/screens/auth/resetpassword/resat_password.dart';
 import 'package:conferance_app/screens/events/event_details_screen.dart';
 import 'package:conferance_app/screens/events/event_screen.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 import '../location/location_screen.dart';
 
@@ -39,7 +37,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Align(
